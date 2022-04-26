@@ -9,6 +9,11 @@ var client = crypto.createDiffieHellman(primeLength, generator);
 var clientKey = client.generateKeys();
 var clientPublicKey =client.getPublicKey()
 // 创建服务端的DH实例，采用跟客户端相同的素数a、p
+//console.log(client.getGenerator());
+global_p=client.getPrime();
+global_g=client.getGenerator();
+console.log(global_p.toString('hex'));
+console.log(global_g.toString('hex'));
 var server = crypto.createDiffieHellman(client.getPrime(), client.getGenerator());
 // 产生公、私钥对，Yb = a^Xb mod p
 var serverKey = server.generateKeys();
@@ -22,8 +27,8 @@ var serverSecret = server.computeSecret(clientPublicKey);
 // 但是 clientSecret === serverSecret
 console.log(clientSecret.toString('hex'));
 console.log(serverSecret.toString('hex'));
-//const cipher=crypto.createCipheriv('aes-256-gcm',clientSecret,'1234567890123456');
-// An encrypt function
+
+// An encrypt function cbc模式
 // function encrypt(text,key) {
  
 //     // Creating Cipheriv with its parameter
@@ -79,6 +84,7 @@ function decrypt(ALGO,enc,key, iv, authTag) {
         str += decipher.final('utf8');
         return str;
 }
+// 原来的代码
 // const aes256gcm = (key) => {
 //     const ALGO = 'aes-256-gcm';
   
