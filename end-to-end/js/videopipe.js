@@ -19,10 +19,25 @@
 // other, and call HandlerFunction when the stream is available in the
 // second PeerConnection.
 //
+// 在WebRTC之上的 "视频管道 "抽象。
+//
+// 这个抽象概念的用法。
+// var pipe = new VideoPipe(mediastream, handlerFunction);
+// handlerFunction = function(mediastream) {
+// do_something
+// }
+// pipe.close()。
+//
+// VideoPipe将建立2个PeerConnections，将它们相互连接。
+// 互相连接，当流在第二个PeerConnection中可用时，调用HandlerFunction。
+// 当第二个PeerConnection可用时，调用处理函数。
 'use strict';
 
 // Preferring a certain codec is an expert option without GUI.
 // Use VP8 by default to limit depacketization issues.
+// eslint-disable-next-line prefer-const
+// 偏爱某种编解码器是一个没有GUI的专家选项。
+// 默认使用VP8以限制去包络化问题。
 // eslint-disable-next-line prefer-const
 let preferredVideoCodecMimeType = 'video/VP8';
 

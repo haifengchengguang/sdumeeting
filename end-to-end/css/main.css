@@ -6,29 +6,28 @@
  *  tree.
  */
 
- button {
-    margin: 20px 10px 0 0;
-    width: 100px;
-  }
-  
-  div#buttons {
-    margin: 0 0 20px 0;
-  }
-  
-  div#status {
-    height: 2em;
-    margin: 1em 0 0 0;
-  }
-  
-  input#audio {
-    margin: 0 0.5em 0 0;
-    position: relative;
-    top: -1px;
-  }
-  
-  video {
-    --width: 45%;
-    width: var(--width);
-    height: calc(var(--width) * 0.75);
-  }
-  
+button {
+  margin: 20px 10px 0 0;
+  width: 100px;
+}
+
+div#buttons {
+  margin: 0 0 20px 0;
+}
+
+div#status {
+  height: 2em;
+  margin: 1em 0 0 0;
+}
+
+input#audio {
+  margin: 0 0.5em 0 0;
+  position: relative;
+  top: -1px;
+}
+
+video {
+  --width: 45%;
+  width: var(--width);
+  height: calc(var(--width) * 0.75);
+}

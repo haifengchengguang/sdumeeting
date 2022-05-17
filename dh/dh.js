@@ -10,11 +10,13 @@ var clientKey = client.generateKeys();
 var clientPublicKey =client.getPublicKey()
 // 创建服务端的DH实例，采用跟客户端相同的素数a、p
 //console.log(client.getGenerator());
-global_p=client.getPrime();
-global_g=client.getGenerator();
-console.log(global_p.toString('hex'));
-console.log(global_g.toString('hex'));
-var server = crypto.createDiffieHellman(client.getPrime(), client.getGenerator());
+global_p=client.getPrime().toString('hex');
+global_g=client.getGenerator().toString('hex');
+console.log(global_p);
+console.log(global_g);
+global_p_buffer=Buffer.from(global_p,'hex');
+global_g_buffer=Buffer.from(global_g,'hex');
+var server = crypto.createDiffieHellman(global_p_buffer, global_g_buffer);
 // 产生公、私钥对，Yb = a^Xb mod p
 var serverKey = server.generateKeys();
 var serverPublicKey = server.getPublicKey();
@@ -125,6 +127,10 @@ function decrypt(ALGO,enc,key, iv, authTag) {
 // console.log(decrypted);
 ALGO='aes-256-gcm';
 const [encrypted,iv,authTag]=encrypt(ALGO,'你好',clientSecret);
+var encryptedStr=encrypted.toString('hex');
+const hash = crypto.createHash('sha256'); 
+var encryptedStrHash=hash.update(encryptedStr, 'utf8').digest('hex');
+console.log(encryptedStrHash);
 const decrypted=decrypt(ALGO,encrypted,serverSecret,iv,authTag);
 console.log(encrypted);
 console.log(decrypted);
